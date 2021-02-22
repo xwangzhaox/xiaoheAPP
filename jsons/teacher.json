@@ -1,0 +1,19 @@
+{
+  "id": 4,
+  "name": "韩老师",
+  "SN": "T9342156",
+  "avatar": "http://wx3.sinaimg.cn/mw690/5301ff11ly1gb58jyz6fgj20p00p0q5g.jpg",
+  "collage": "北京大学",
+  "age": 21,
+  "description": "擅长理科，基础功扎实，能够帮助学员领会到理科的本质",
+  "price": 120,
+  "skilled": [
+    {"name": "物理"},
+    {"name": "化学"},
+    {"name": "数学"}
+  ],
+  "certificates": [
+    {"name": "教师证"},
+    {"name": "学生证"}
+  ]
+}
