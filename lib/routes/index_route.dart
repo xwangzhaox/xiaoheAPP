@@ -13,7 +13,7 @@ class IndexContainerState extends State<IndexContainer> {
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "日常",),
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "我的",),
   ];
-  final pages = [Home(), ClassSchedule(), PublicClass(), PublicNavigator(), Profile()];
+  final pages = [Home(), ClassSchedule(), PublicClass(), PublicNavigator(), ProfileRoute()];
   int _selectedIndex = 1;
 
   @override

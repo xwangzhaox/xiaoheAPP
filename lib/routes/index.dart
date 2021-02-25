@@ -5,3 +5,4 @@ export 'profile_route.dart';
 export 'public_class_route.dart';
 export 'public_navigator_route.dart';
 export 'teachers_route.dart';
+export 'login_route.dart';

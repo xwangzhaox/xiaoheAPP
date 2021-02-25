@@ -139,9 +139,6 @@ class _TeachersState extends State<Teachers> {
   }
 
   Widget _teacherList(){
-    print(_selectGradeSortCondition.name);
-    print(_selectSubjectSortCondition.name);
-    print(_selectPriceSortCondition.name);
     return InfiniteListView<Teacher>(
       refreshKey: refreshIndicatorKey,
       onRetrieveData: (int page, List<Teacher> items, bool refresh) async {

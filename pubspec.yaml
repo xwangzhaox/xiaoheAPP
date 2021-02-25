@@ -23,7 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations:
+    sdk: flutter
   gzx_dropdown_menu: ^2.1.0
   flutter_screenutil: ^4.0.1
   json_annotation: ^3.0.0
@@ -33,7 +34,8 @@ dependencies:
   cupertino_icons: ^1.0.0
   shared_preferences: ^0.5.12+4
   cached_network_image: ^2.0.0
-#  flukit: ^1.0.2
+  intl: ^0.16.0
+  provider: ^3.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +60,7 @@ flutter:
     - images/iconf1at2x.png
     - images/iconf2at2x.png
     - images/iconf3at2x.png
+    - images/default-avatar.png
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

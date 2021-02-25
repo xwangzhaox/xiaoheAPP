@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:xiaohe_app/common/global.dart';
-import 'package:xiaohe_app/models/profile.dart';
-import 'package:xiaohe_app/models/teacher.dart';
+import '../index.dart';
+
+Map<String, dynamic> httpHeaders = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+};
 
 class XiaoHe {
   // 在网络请求过程中可能会需要使用当前的context信息，比如在请求失败时
@@ -14,6 +18,7 @@ class XiaoHe {
 
   BuildContext context;
   Options _options;
+
   static Dio dio = new Dio(BaseOptions(
     connectTimeout: 150000,
     receiveTimeout: 150000,
@@ -23,34 +28,34 @@ class XiaoHe {
       return true;
     },
     baseUrl: 'http://www.jieshanju.cn/wechats/v2/',
-    headers: httpHeaders
+    headers: httpHeaders,
   ));
 
   static void init() {
     // 添加缓存插件
-    // dio.interceptors.add(Global.netCache);/**/
+    dio.interceptors.add(Global.netCache);/**/
     // 设置用户token（可能为null，代表未登录）
-    // dio.options.headers[HttpHeaders.authorizationHeader] = Global.profile.token;
+    dio.options.headers[HttpHeaders.authorizationHeader] = Global.profile.token;
   }
 
   // 登录接口，登录成功后返回用户信息
   Future<Profile> login(String login, String pwd) async {
-    // String basic = 'Basic ' + base64.encode(utf8.encode('$login:$pwd'));
+    String basic = 'Basic ' + base64.encode(utf8.encode('$login:$pwd'));
     var r = await dio.get(
       "session/app_sign_in?login=$login&password=$pwd",
       options: _options.merge(headers: {
-        // HttpHeaders.authorizationHeader: basic
+        HttpHeaders.authorizationHeader: basic
       }, extra: {
         "noCache": true, //本接口禁用缓存
       }),
     );
     print(r);
     //登录成功后更新公共头（authorization），此后的所有请求都会带上用户身份信息
-    // dio.options.headers[HttpHeaders.authorizationHeader] = basic;
+    dio.options.headers[HttpHeaders.authorizationHeader] = basic;
     //清空所有缓存
     Global.netCache.cache.clear();
     //更新profile中的token信息
-    // Global.profile.token = basic;
+    Global.profile.token = basic;
     return Profile.fromJson(r.data);
   }
 
@@ -71,8 +76,3 @@ class XiaoHe {
     return (r.data["teachers"] as List).map((e) => Teacher.fromJson(e)).toList();
   }
 }
-
-Map<String, dynamic> httpHeaders = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json'
-};
